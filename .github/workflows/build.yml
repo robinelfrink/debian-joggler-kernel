@@ -1,0 +1,63 @@
+name: Build
+
+on:
+  push:
+    tags:
+    - 'v*'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    env:
+      KERNEL_VERSION: 4.19
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Build kernel
+      run: |
+        docker run --rm --name debian-joggler-kernel --env KERNEL_VERSION=${{ env.KERNEL_VERSION }} \
+            --volume ${PWD}:/debian-joggler-kernel \
+            --workdir /debian-joggler-kernel \
+            debian:buster-slim /bin/bash build.sh
+    - name: Fetch full kernel version
+      run: echo ::set-env name=VERSION::$(ls linux-${{ env.KERNEL_VERSION }}.*.orig.tar.gz | sed -E 's/^linux-(.*)_(.*)\.orig\.tar\.gz/\1/')
+    - name: Create release
+      uses: actions/create-release@v1.0.0
+      id: create_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_SECRET }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+    - name: Upload kernel package
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_SECRET }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./linux-image-${{ env.VERSION }}_${{ env.VERSION }}-1_i386.deb
+        asset_name: linux-image-${{ env.VERSION }}_${{ env.VERSION }}-1_i386.deb
+        asset_content_type: application/vnd.debian.binary-package
+    - name: Upload kernel headers package
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_SECRET }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./linux-headers-${{ env.VERSION }}_${{ env.VERSION }}-1_i386.deb
+        asset_name: linux-headers-${{ env.VERSION }}_${{ env.VERSION }}-1_i386.deb
+        asset_content_type: application/vnd.debian.binary-package
+    - name: Upload kernel libc development package
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_SECRET }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./linux-libc-dev_${{ env.VERSION }}-1_i386.deb
+        asset_name: linux-libc-dev_${{ env.VERSION }}-1_i386.deb
+        asset_content_type: application/vnd.debian.binary-package
