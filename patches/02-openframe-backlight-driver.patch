@@ -1,7 +1,7 @@
-diff -uNr linux-source-4.9-orig/drivers/video/backlight/Kconfig linux-source-4.9/drivers/video/backlight/Kconfig
---- linux-source-4.9-orig/drivers/video/backlight/Kconfig	2017-11-24 07:33:43.000000000 +0000
-+++ linux-source-4.9/drivers/video/backlight/Kconfig	2018-01-13 10:28:16.476227223 +0000
-@@ -403,6 +403,14 @@
+diff -uNr linux-source-5.4-orig/drivers/video/backlight/Kconfig linux-source-5.4/drivers/video/backlight/Kconfig
+--- linux-source-5.4-orig/drivers/video/backlight/Kconfig	2020-01-13 16:48:25.486672133 +0000
++++ linux-source-5.4/drivers/video/backlight/Kconfig	2020-01-13 16:50:45.458959240 +0000
+@@ -386,6 +386,14 @@
  	help
  	  This supports TI LP8788 backlight driver.
  
@@ -15,10 +15,10 @@ diff -uNr linux-source-4.9-orig/drivers/video/backlight/Kconfig linux-source-4.9
 +
  config BACKLIGHT_OT200
  	tristate "Backlight driver for ot200 visualisation device"
- 	depends on BACKLIGHT_CLASS_DEVICE && CS5535_MFGPT && GPIO_CS5535
-diff -uNr linux-source-4.9-orig/drivers/video/backlight/Makefile linux-source-4.9/drivers/video/backlight/Makefile
---- linux-source-4.9-orig/drivers/video/backlight/Makefile	2017-11-24 07:33:43.000000000 +0000
-+++ linux-source-4.9/drivers/video/backlight/Makefile	2018-01-13 10:28:16.476227223 +0000
+ 	depends on CS5535_MFGPT && GPIO_CS5535
+diff -uNr linux-source-5.4-orig/drivers/video/backlight/Makefile linux-source-5.4/drivers/video/backlight/Makefile
+--- linux-source-5.4-orig/drivers/video/backlight/Makefile	2020-01-13 16:48:25.486672133 +0000
++++ linux-source-5.4/drivers/video/backlight/Makefile	2020-01-13 16:50:45.466959266 +0000
 @@ -45,6 +45,7 @@
  obj-$(CONFIG_BACKLIGHT_LV5207LP)	+= lv5207lp.o
  obj-$(CONFIG_BACKLIGHT_MAX8925)		+= max8925_bl.o
@@ -27,9 +27,9 @@ diff -uNr linux-source-4.9-orig/drivers/video/backlight/Makefile linux-source-4.
  obj-$(CONFIG_BACKLIGHT_OT200)		+= ot200_bl.o
  obj-$(CONFIG_BACKLIGHT_PANDORA)		+= pandora_bl.o
  obj-$(CONFIG_BACKLIGHT_PCF50633)	+= pcf50633-backlight.o
-diff -uNr linux-source-4.9-orig/drivers/video/backlight/openframe_bl.c linux-source-4.9/drivers/video/backlight/openframe_bl.c
---- linux-source-4.9-orig/drivers/video/backlight/openframe_bl.c	1970-01-01 00:00:00.000000000 +0000
-+++ linux-source-4.9/drivers/video/backlight/openframe_bl.c	2018-01-13 10:28:16.476227223 +0000
+diff -uNr linux-source-5.4-orig/drivers/video/backlight/openframe_bl.c linux-source-5.4/drivers/video/backlight/openframe_bl.c
+--- linux-source-5.4-orig/drivers/video/backlight/openframe_bl.c	1970-01-01 00:00:00.000000000 +0000
++++ linux-source-5.4/drivers/video/backlight/openframe_bl.c	2020-01-13 16:50:45.466959266 +0000
 @@ -0,0 +1,143 @@
 +/*
 + *  Backlight Driver for Openframe devices

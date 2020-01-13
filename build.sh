@@ -1,3 +1,4 @@
+echo 'deb http://deb.debian.org/debian buster-backports main' > /etc/apt/sources.list
 sed 's/^deb /deb-src /' /etc/apt/sources.list >> /etc/apt/sources.list
 apt-get --yes update
 apt-get --yes install build-essential fakeroot curl linux-source-${KERNEL_VERSION}
