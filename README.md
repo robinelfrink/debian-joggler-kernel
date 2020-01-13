@@ -27,5 +27,8 @@ $ make deb-pkg
 A handy bash script is included to run all this using Docker:
 
 ```shell
-
+docker run --rm --name debian-joggler-kernel --env KERNEL_VERSION=4.19 \
+    --volume ${PWD}:/debian-joggler-kernel \
+    --workdir /debian-joggler-kernel \
+    debian:buster-slim /bin/bash build.sh
 ```
