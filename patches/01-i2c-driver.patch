@@ -1,7 +1,7 @@
-diff -uNr linux-source-4.9-orig/drivers/i2c/busses/i2c-isch.c linux-source-4.9/drivers/i2c/busses/i2c-isch.c
---- linux-source-4.9-orig/drivers/i2c/busses/i2c-isch.c	2017-11-24 07:33:43.000000000 +0000
-+++ linux-source-4.9/drivers/i2c/busses/i2c-isch.c	2018-01-13 10:31:46.457492929 +0000
-@@ -52,6 +52,8 @@
+diff -uNr linux-source-5.4-orig/drivers/i2c/busses/i2c-isch.c linux-source-5.4/drivers/i2c/busses/i2c-isch.c
+--- linux-source-5.4-orig/drivers/i2c/busses/i2c-isch.c	2020-02-11 13:35:55.000000000 +0100
++++ linux-source-5.4/drivers/i2c/busses/i2c-isch.c	2020-04-09 22:50:13.934371452 +0200
+@@ -44,6 +44,8 @@
  #define SCH_WORD_DATA		0x03
  #define SCH_BLOCK_DATA		0x05
  
@@ -10,7 +10,7 @@ diff -uNr linux-source-4.9-orig/drivers/i2c/busses/i2c-isch.c linux-source-4.9/d
  static unsigned short sch_smba;
  static struct i2c_adapter sch_adapter;
  static int backbone_speed = 33000; /* backbone speed in kHz */
-@@ -270,7 +272,7 @@
+@@ -262,7 +264,7 @@
  	if (!res)
  		return -EBUSY;
  

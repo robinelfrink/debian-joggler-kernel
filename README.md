@@ -14,8 +14,7 @@ Follow the steps from the Debian Linux Kernel Handbook,
 In short:
 
 ```shell
-$ wget <url of linux-source-x.x.deb>
-$ sudo dpkg -i linux-source-x.x.deb
+$ sudo apt-get install linux-source-x.x
 $ tar xJf /usr/src/linux-source-x.x.tar.xz
 $ cd linux-source-x.x
 $ cp <location of x.x/config> .config
